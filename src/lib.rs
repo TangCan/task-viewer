@@ -9,8 +9,10 @@ mod tests {
     fn cli_show_task() {
         use crate::cli::*;
         use colored::*;
-        assert_eq!(task_todo(0, 0, "test_task"), "test_task".red());
-        assert_eq!(task_done("test_task"), "test_task".green());
+        assert_eq!(task_todo(0, 0, "todo_task"), "todo_task".red());
+        show_task_todo(0, 0, "todo_task");
+        assert_eq!(task_done("done_task"), "done_task".green());
+        show_task_done("done_task");
     }
 }
 
@@ -34,5 +36,14 @@ pub mod cli {
 
     pub fn task_done(task_desc: &str) -> colored::ColoredString {
         task_desc.green()
+    }
+    pub fn show_task_todo(task_begin_week: u32, task_begin_week_day: u32, task_desc: &str) {
+        println!(
+            "{}",
+            task_todo(task_begin_week, task_begin_week_day, task_desc)
+        );
+    }
+    pub fn show_task_done(task_desc: &str) {
+        println!("{}", task_done(task_desc));
     }
 }
